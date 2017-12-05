@@ -1,6 +1,7 @@
 import {AsyncStorage} from 'react-native';
-import {DECKS_STORAGE_KEY} from '../actions/index';
-import {generateId} from './helpers';
+import {FLASHCARDS_STORAGE_KEY} from '../store';
+import {guid} from './helpers';
+
 
 export function setDummyData() {
     const data = {
@@ -8,12 +9,12 @@ export function setDummyData() {
             title: 'React',
             questions: [
                 {
-                    id: generateId(),
+                    id: guid,
                     question: 'What is React?',
                     answer: 'A library for managing user interfaces'
                 },
                 {
-                    id: generateId(),
+                    id: guid(),
                     question: 'Where do you make Ajax requests in React?',
                     answer: 'The componentDidMount lifecycle event'
                 }
@@ -23,7 +24,7 @@ export function setDummyData() {
             title: 'JavaScript',
             questions: [
                 {
-                    id: generateId(),
+                    id: guid(),
                     question: 'What is a closure?',
                     answer: 'The combination of a function and the lexical environment within which that function was declared.'
                 }
@@ -31,16 +32,6 @@ export function setDummyData() {
         }
     };
 
-    AsyncStorage.removeItem(DECKS_STORAGE_KEY);
-    AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(data));
-    const delta = {
-        ['React']: {
-            questions: [{
-                id: generateId(),
-                question: '?',
-                answer: '!'
-            }]
-        }
-    };
-    AsyncStorage.mergeItem(DECKS_STORAGE_KEY, JSON.stringify(delta))
+    AsyncStorage.removeItem(FLASHCARDS_STORAGE_KEY);
+    AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(data));
 }

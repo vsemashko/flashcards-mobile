@@ -1,6 +1,8 @@
 import {denormalize, normalize, schema} from 'normalizr';
 import {AsyncStorage} from 'react-native';
-import {generateId} from '../utils/helpers';
+import {guid} from '../utils/helpers';
+import {FLASHCARDS_STORAGE_KEY} from '../store';
+
 
 export const ADD_ENTITIES = 'ADD_ENTITIES';
 export const ADD_DECK = 'ADD_DECK';
@@ -11,16 +13,19 @@ export const desk = new schema.Entity('decks', {
     questions: [question]
 }, {idAttribute: 'title'});
 
-export const DECKS_STORAGE_KEY = 'Flashcards:qwerty';
-
 export const addEntities = (entities) => ({
     type: ADD_ENTITIES,
     payload: entities
 });
 
+export const addDeck = (deck) => ({
+    type: ADD_DECK,
+    payload: deck
+});
+
 export const getDecks = () => dispatch => (
     AsyncStorage
-        .getItem(DECKS_STORAGE_KEY)
+        .getItem(FLASHCARDS_STORAGE_KEY)
         .then(response => JSON.parse(response))
         .then(decks => {
 
@@ -28,27 +33,33 @@ export const getDecks = () => dispatch => (
             const entities = normalize(decks, [desk]).entities;
 
             dispatch(addEntities(entities));
-
-            dispatch(addQuestion('React', {
-                id: generateId(),
-                question: '?',
-                answer: '!'
-            }));
         })
 );
 
-export const addQuestion = (deck, question) => (dispatch, getState) => {
+export const addQuestion = (deck, question, answer) => ({
+    type: ADD_QUESTION,
+    payload: {
+        deck,
+        question: {
+            id: guid(),
+            question,
+            answer
+        }
+    }
+});
+
+export const addQuestionAsync = (deck, question, answer) => (dispatch, getState) => {
     const state = getState();
 
-    const denormalizedData = denormalize(Object.keys(state.decks), [desk], state);
-    console.log(denormalizedData)
+    dispatch(addQuestion(deck, question, answer));
+
+    const denormalizedDeck = denormalize(deck, desk, state);
 
     console.log(state);
 
 
-
     /*return AsyncStorage
-        .setItem(DECKS_STORAGE_KEY, {
+        .setItem(FLASHCARDS_STORAGE_KEY, {
             [deck]: [question]
         })*/
 };

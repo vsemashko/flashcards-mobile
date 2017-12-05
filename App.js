@@ -1,26 +1,34 @@
+import './ReactotronConfig';
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import StatusBar from './src/components/common/StatusBar';
 import {darkblue} from './src/utils/colors';
 import {Provider} from 'react-redux';
-import store from './src/store';
-import {addQuestion, DECKS_STORAGE_KEY, getDecks} from './src/actions/index';
-import {setDummyData} from './src/utils/_dummy-data';
-import {AsyncStorage} from 'react-native';
-import {generateId} from './src/utils/helpers';
+import {store, persistor} from './src/store';
+import {PersistGate} from 'redux-persist/es/integration/react'
+import {AppLoading} from 'expo';
+import {addDeck, addQuestion} from './src/actions/index';
 
-setDummyData();
 
-store.dispatch(getDecks());
+//store.dispatch(getDecks());
+
+
+/*setTimeout(() => {
+    console.log('!!!!!!')
+    store.dispatch(addDeck('React'));
+    store.dispatch(addQuestion('React', '?', '!'));
+}, 3000);*/
 
 export default class App extends React.Component {
     render() {
         return (
             <Provider store={store}>
-                <View style={styles.container}>
-                    <StatusBar backgroundColor={darkblue} barStyle="light-content"/>
-                    <Text>qwe</Text>
-                </View>
+                <PersistGate persistor={persistor} loading={<AppLoading/>}>
+                    <View style={styles.container}>
+                        <StatusBar backgroundColor={darkblue} barStyle="light-content"/>
+                        <Text>{JSON.stringify(store.getState())}</Text>
+                    </View>
+                </PersistGate>
             </Provider>
         );
     }
