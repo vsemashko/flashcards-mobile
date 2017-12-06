@@ -1,24 +1,22 @@
 import './ReactotronConfig';
 import React from 'react';
-import {AsyncStorage, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import StatusBar from './src/components/common/StatusBar';
 import {darkblue} from './src/utils/colors';
 import {Provider} from 'react-redux';
-import {store, persistor, FLASHCARDS_STORAGE_KEY} from './src/store';
+import {persistor, store} from './src/store';
 import {PersistGate} from 'redux-persist/es/integration/react'
 import {AppLoading} from 'expo';
 import {addDeck, addQuestion} from './src/actions/index';
+import AddDeckComponent from './src/components/deck/AddDeckComponent';
 
 
-//store.dispatch(getDecks());
-
-setTimeout(() => {
-
+/*setTimeout(() => {
     if (!store.getState().decks['React']) {
         store.dispatch(addDeck('React'));
+        store.dispatch(addQuestion('React', '?', '!'));
     }
-    store.dispatch(addQuestion('React', '?', '!'));
-}, 3000);
+}, 3000);*/
 
 export default class App extends React.Component {
     render() {
@@ -27,7 +25,7 @@ export default class App extends React.Component {
                 <PersistGate persistor={persistor} loading={<AppLoading/>}>
                     <View style={styles.container}>
                         <StatusBar backgroundColor={darkblue} barStyle="light-content"/>
-                        <Text>{JSON.stringify(store.getState())}</Text>
+                        <AddDeckComponent/>
                     </View>
                 </PersistGate>
             </Provider>

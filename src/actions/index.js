@@ -1,2 +1,2 @@
-export {ADD_DECK, addDeck} from './decks';
-export {ADD_QUESTION, addQuestion} from './questions';
+export {ADD_DECK, REMOVE_DECK, addDeck, removeDeck} from './decks.action';
+export {ADD_QUESTION, REMOVE_QUESTION, addQuestion, removeQuestion} from './questions.action';
