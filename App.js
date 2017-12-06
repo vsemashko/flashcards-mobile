@@ -7,16 +7,17 @@ import {Provider} from 'react-redux';
 import {persistor, store} from './src/store';
 import {PersistGate} from 'redux-persist/es/integration/react'
 import {AppLoading} from 'expo';
-import {addDeck, addQuestion} from './src/actions/index';
-import AddDeckComponent from './src/components/deck/AddDeckComponent';
+import DeckListComponent from './src/components/deck/DeckListComponent';
+import {addDeck, addQuestion} from './src/actions';
 
 
-/*setTimeout(() => {
+setTimeout(() => {
     if (!store.getState().decks['React']) {
         store.dispatch(addDeck('React'));
         store.dispatch(addQuestion('React', '?', '!'));
     }
-}, 3000);*/
+    store.dispatch(addDeck('Redux'));
+}, 3000);
 
 export default class App extends React.Component {
     render() {
@@ -25,7 +26,7 @@ export default class App extends React.Component {
                 <PersistGate persistor={persistor} loading={<AppLoading/>}>
                     <View style={styles.container}>
                         <StatusBar backgroundColor={darkblue} barStyle="light-content"/>
-                        <AddDeckComponent/>
+                        <DeckListComponent/>
                     </View>
                 </PersistGate>
             </Provider>
@@ -35,9 +36,6 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
+        flex: 1
     },
 });
