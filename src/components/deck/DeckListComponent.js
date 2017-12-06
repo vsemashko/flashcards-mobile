@@ -5,12 +5,12 @@ import {DeckItem} from './DeckItem';
 
 
 function DeckListComponent({decks}) {
-    return (
-        <View>
-            <FlatList data={decks} renderItem={({item}) => <DeckItem deck={item}/>}/>
-        </View>
-    );
-}
+        return (
+            <View>
+                <FlatList data={decks} renderItem={({item}) => <DeckItem deck={item}/>}/>
+            </View>
+        );
+    }
 
 function mapStateToProps({decks}) {
     return {

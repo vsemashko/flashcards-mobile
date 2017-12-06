@@ -1,54 +1,63 @@
-import PropTypes from 'prop-types';
+import {FontAwesome, Ionicons} from '@expo/vector-icons/index';
 import React from 'react';
-import {BackHandler, StyleSheet} from 'react-native';
-import {addNavigationHelpers, NavigationActions, StackNavigator} from 'react-navigation';
-import {connect} from 'react-redux';
+import {Platform, Text} from 'react-native';
+import {StackNavigator, TabNavigator} from 'react-navigation';
+import DeckListScreen from '../components/deck/DeckListScreen';
+import {purple, white} from '../utils/colors';
 
-const styles = StyleSheet.create({
-    header: {
-        backgroundColor: darkblue
-    }
-});
 
-export const AppNavigator = StackNavigator({
-});
-
-class AppWithNavigationState extends React.Component {
-    componentDidMount() {
-        BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
-    }
-
-    componentWillUnmount() {
-        BackHandler.removeEventListener("hardwareBackPress", this.onBackPress);
-    }
-
-    onBackPress = () => {
-        const {dispatch, nav} = this.props;
-        if (nav.index === 0) {
-            return false;
-        }
-        dispatch(NavigationActions.back());
-        return true;
-    };
-
+export default class SCR extends React.Component {
     render() {
-        const {dispatch, nav} = this.props;
-        const navigation = addNavigationHelpers({
-            dispatch,
-            state: nav
-        });
-
-        return <AppNavigator navigation={navigation}/>;
+        return <Text>SCR2</Text>;
     }
 }
 
-AppWithNavigationState.propTypes = {
-    dispatch: PropTypes.func.isRequired,
-    nav: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = state => ({
-    nav: state.nav,
+const Tabs = TabNavigator({
+    HH: {
+        screen: <DeckListScreen/>,
+        navigationOptions: {
+            tabBarLabel: 'EE',
+            tabBarIcon: ({tintColor}) => <Ionicons name='ios-bookmarks' size={30} color={tintColor}/>
+        },
+    },
+    AddEntry: {
+        screen: <SCR/>,
+        navigationOptions: {
+            tabBarLabel: 'Add Entry',
+            tabBarIcon: ({tintColor}) => <FontAwesome name='plus-square' size={30} color={tintColor}/>
+        },
+    }
+}, {
+    navigationOptions: {
+        header: null
+    },
+    tabBarOptions: {
+        activeTintColor: Platform.OS === 'ios' ? purple : white,
+        style: {
+            height: 56,
+            backgroundColor: Platform.OS === 'ios' ? white : purple,
+            shadowColor: 'rgba(0, 0, 0, 0.24)',
+            shadowOffset: {
+                width: 0,
+                height: 3
+            },
+            shadowRadius: 6,
+            shadowOpacity: 1
+        }
+    }
 });
 
-export default connect(mapStateToProps)(AppWithNavigationState);
+export const MainNavigator = StackNavigator({
+    Home: {
+        screen: Tabs,
+    },
+    EntryDetail: {
+        screen: <SCR/>,
+        navigationOptions: {
+            headerTintColor: white,
+            headerStyle: {
+                backgroundColor: purple,
+            }
+        }
+    }
+});

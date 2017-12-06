@@ -1,14 +1,14 @@
-import './ReactotronConfig';
+import {AppLoading} from 'expo';
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import StatusBar from './src/components/common/StatusBar';
-import {darkblue} from './src/utils/colors';
 import {Provider} from 'react-redux';
-import {persistor, store} from './src/store';
-import {PersistGate} from 'redux-persist/es/integration/react'
-import {AppLoading} from 'expo';
-import DeckListComponent from './src/components/deck/DeckListComponent';
+import {PersistGate} from 'redux-persist/es/integration/react';
+import './ReactotronConfig';
 import {addDeck, addQuestion} from './src/actions';
+import StatusBar from './src/components/common/StatusBar';
+import {MainNavigator} from './src/navigators/AppNavigator';
+import {persistor, store} from './src/store';
+import {darkblue} from './src/utils/colors';
 
 
 setTimeout(() => {
@@ -26,7 +26,7 @@ export default class App extends React.Component {
                 <PersistGate persistor={persistor} loading={<AppLoading/>}>
                     <View style={styles.container}>
                         <StatusBar backgroundColor={darkblue} barStyle="light-content"/>
-                        <DeckListComponent/>
+                        <MainNavigator/>
                     </View>
                 </PersistGate>
             </Provider>
