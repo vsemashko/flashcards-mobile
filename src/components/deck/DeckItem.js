@@ -14,7 +14,7 @@ export function DeckItem({deck}) {
 
 const styles = StyleSheet.create({
     container: {
-        height: 150,
+        height: 130,
         borderBottomColor: black,
         borderBottomWidth: 2,
         alignItems: 'center',

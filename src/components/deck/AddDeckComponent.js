@@ -1,21 +1,70 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Text, View} from 'react-native';
+import {StyleSheet, Text, TextInput, View} from 'react-native';
+import {addDeck} from '../../actions';
+import {SubmitBtn} from '../form-controls/SubmitBtn';
+import {white} from '../../utils/colors';
 
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: white
+    },
+    title: {
+        margin: 20,
+        marginTop: 40,
+        fontSize: 40,
+        textAlign: 'center',
+        fontWeight: 'bold'
+    },
+    textInput: {
+        margin: 20,
+        padding: 10,
+        height: 50,
+        borderWidth: 2,
+        borderRadius: 5
+    }
+});
 
-function AddDeckComponent({decks, questions}) {
-    return (
-        <View>
-            <Text>{JSON.stringify(decks)}</Text>
-            <Text>{JSON.stringify(questions)}</Text>
-        </View>
-    );
+class AddDeckComponent extends React.Component {
+    state = {
+        deck: ''
+    };
+
+    submit() {
+        this.props.addDeck(this.state.deck);
+        this.setState({deck: ''});
+        this.props.navigation.navigate('Decks');
+    }
+
+    render() {
+        const {deck} = this.state;
+        const {addDeck} = this.props;
+
+        return (
+            <View style={styles.container}>
+                <Text style={styles.title}>What is the title of your new deck?</Text>
+                <TextInput style={styles.textInput}
+                           placeholder='Deck Title' autofocus={true}
+                           value={deck}
+                           onChangeText={text => this.setState({deck: text})}/>
+                <SubmitBtn text={'Submit'} onPress={this.submit.bind(this)}/>
+            </View>
+        );
+    }
 }
 
-function mapStateToProps({decks, questions}) {
-    return {decks, questions};
+function mapStateToProps() {
+    return {};
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        addDeck: deck => dispatch(addDeck(deck))
+    };
 }
 
 export default connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(AddDeckComponent);

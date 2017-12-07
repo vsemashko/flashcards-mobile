@@ -1,5 +1,5 @@
 import React from 'react';
-import StatusBar from './StatusBar';
+import StatusBar from './FlashcardsStatusBar';
 
 import renderer from 'react-test-renderer';
 
