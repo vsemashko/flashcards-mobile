@@ -6,6 +6,7 @@
     "description": "Mobile app for working with flashacrds.",
     "slug": "flashcards-mobile",
     "version": "0.1",
+    "icon": "https://www.dropbox.com/s/6o4162jzfsh0sze/flashcards_icon_128.png?raw=1",
     "ios": {
       "bundleIdentifier": "org.udacityflashcards.exp"
     },
