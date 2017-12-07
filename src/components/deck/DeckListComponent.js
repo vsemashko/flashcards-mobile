@@ -11,14 +11,24 @@ const styles = StyleSheet.create({
     },
 });
 
-function DeckListComponent({decks}) {
-    return (
-        <View style={styles.container}>
-            <FlatList data={decks}
-                      keyExtractor={item => item.title}
-                      renderItem={({item}) => <DeckItem deck={item}/>}/>
-        </View>
-    );
+class DeckListComponent extends React.Component {
+    goToDeckDetails(deck) {
+        this.props.navigation.navigate('DeckDetails', {deck});
+    }
+
+    render() {
+        const {decks} = this.props;
+
+        return (
+            <View style={styles.container}>
+                <FlatList data={decks}
+                          keyExtractor={item => item.title}
+                          renderItem={({item}) =>
+                              <DeckItem deck={item} onSelect={this.goToDeckDetails.bind(this, item.title)}/>
+                          }/>
+            </View>
+        );
+    }
 }
 
 function mapStateToProps({decks}) {

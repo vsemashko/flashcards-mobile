@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
-import {addDeck} from '../../actions';
+import {addDeck, addQuestion} from '../../actions';
 import {SubmitBtn} from '../form-controls/SubmitBtn';
 import {white} from '../../utils/colors';
 
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     }
 });
 
-class AddDeckComponent extends React.Component {
+class AddQuestionComponent extends React.Component {
     state = {
         deck: ''
     };
@@ -59,16 +59,17 @@ class AddDeckComponent extends React.Component {
 }
 
 function mapStateToProps() {
+    const {deck} = navigation.state.params;
     return {};
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        addDeck: deck => dispatch(addDeck(deck))
+        addQuestion: (deck, question, answer) => dispatch(addQuestion(deck, question, answer))
     };
 }
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(AddDeckComponent);
+)(AddQuestionComponent);

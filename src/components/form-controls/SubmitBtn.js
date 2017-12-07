@@ -1,15 +1,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {black, purple, white} from '../../utils/colors';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {black, white} from '../../utils/colors';
 
-export function SubmitBtn({text, onPress}) {
+export function SubmitBtn({text, onPress, buttonStyle = {}, textStyle = {}}) {
     return (
         <View style={styles.container}>
             <TouchableOpacity
-                style={styles.submitBtn}
+                style={[styles.submitBtn, buttonStyle]}
                 onPress={onPress}>
-                <Text style={styles.submitBtnText}>{text}</Text>
+                <Text style={[styles.submitBtnText, textStyle]}>{text}</Text>
             </TouchableOpacity>
         </View>
     );
@@ -20,10 +20,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     submitBtn: {
+        borderColor: black,
+        borderWidth: 2,
         backgroundColor: black,
         padding: 10,
-        marginLeft: 60,
-        marginRight: 60,
+        paddingLeft: 30,
+        paddingRight: 30,
+        margin: 10,
         borderRadius: 7,
         height: 60
     },
@@ -36,5 +39,7 @@ const styles = StyleSheet.create({
 
 SubmitBtn.propTypes = {
     text: PropTypes.string.isRequired,
-    onPress: PropTypes.func.isRequired
+    onPress: PropTypes.func.isRequired,
+    buttonStyle: PropTypes.object,
+    textStyle: PropTypes.object
 };

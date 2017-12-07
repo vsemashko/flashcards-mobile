@@ -1,11 +1,13 @@
 import {FontAwesome, MaterialIcons} from '@expo/vector-icons/index';
 import React from 'react';
-import {StackNavigator, TabNavigator} from 'react-navigation';
+import {BackHandler} from 'react-native';
+import {StackNavigator, TabNavigator, NavigationActions} from 'react-navigation';
 import {black, purple, white} from '../utils/colors';
 import DeckListComponent from '../components/deck/DeckListComponent';
 import AddDeckComponent from '../components/deck/AddDeckComponent';
+import DeckDetailsComponent from '../components/deck/DeckDetailsComponent';
 
-export const Tabs = TabNavigator({
+const Tabs = TabNavigator({
     Decks: {
         screen: DeckListComponent,
         navigationOptions: {
@@ -37,12 +39,13 @@ export const MainNavigator = StackNavigator({
     Home: {
         screen: Tabs,
     },
-    EntryDetail: {
-        screen: DeckListComponent,
+    DeckDetails: {
+        screen: DeckDetailsComponent,
         navigationOptions: {
             headerTintColor: white,
             headerStyle: {
-                backgroundColor: purple,
+                height: 65,
+                backgroundColor: black
             }
         }
     }

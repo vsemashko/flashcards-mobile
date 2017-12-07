@@ -1,16 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {black, gray} from '../../utils/colors';
-
-export function DeckItem({deck}) {
-    return (
-        <View style={styles.container}>
-            <Text style={styles.title}>{deck.title}</Text>
-            <Text style={styles.questionsInfo}>{deck.questions.length} cards</Text>
-        </View>
-    );
-}
 
 const styles = StyleSheet.create({
     container: {
@@ -29,9 +20,19 @@ const styles = StyleSheet.create({
     }
 });
 
+export function DeckItem({deck, onSelect}) {
+    return (
+        <TouchableOpacity style={styles.container} onPress={() => onSelect()}>
+            <Text style={styles.title}>{deck.title}</Text>
+            <Text style={styles.questionsInfo}>{deck.questions.length} cards</Text>
+        </TouchableOpacity>
+    );
+}
+
 DeckItem.propTypes = {
     deck: PropTypes.shape({
         title: PropTypes.string.isRequired,
         questions: PropTypes.arrayOf(PropTypes.string).isRequired
-    }).isRequired
+    }).isRequired,
+    onSelect: PropTypes.func.isRequired
 };
