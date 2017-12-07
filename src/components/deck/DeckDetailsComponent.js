@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontWeight: 'bold'
     },
-    questionsInfo: {
+    cardssInfo: {
         color: gray,
         textAlign: 'center',
         fontSize: 20
@@ -34,11 +34,13 @@ const styles = StyleSheet.create({
 
 class DeckDetailsComponent extends React.Component {
     goToAddCard() {
-
+        const {navigation, deck} = this.props;
+        navigation.navigate('AddCard', {deck: deck.title});
     }
 
     goToQuiz() {
-
+        const {navigation, deck} = this.props;
+        navigation.navigate('Quiz', {deck: deck.title});
     }
 
     render() {
@@ -48,11 +50,11 @@ class DeckDetailsComponent extends React.Component {
             <View style={styles.container}>
                 <View style={styles.topContainerSection}>
                     <Text style={styles.title}>{deck.title}</Text>
-                    <Text style={styles.questionsInfo}>{deck.questions.length} cards</Text>
+                    <Text style={styles.cardssInfo}>{deck.cards.length} cards</Text>
                 </View>
                 <View style={styles.bottomContainerSection}>
                     <SubmitBtn text={'Add Card'} onPress={this.goToAddCard.bind(this)} buttonStyle={{backgroundColor: white}} textStyle={{color: black}}/>
-                    {deck.questions.length > 0 &&
+                    {deck.cards.length > 0 &&
                     <SubmitBtn text={'Start Quiz'} onPress={this.goToQuiz.bind(this)}/>}
                 </View>
             </View>

@@ -8,7 +8,6 @@ import {persistor, store} from './src/store';
 import FlashcardsStatusBar from './src/components/common/FlashcardsStatusBar';
 import {MainNavigator} from './src/navigators/AppNavigator';
 
-
 export default class App extends React.Component {
     render() {
         return (

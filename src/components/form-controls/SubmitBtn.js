@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     submitBtn: {
+        width: 200,
         borderColor: black,
         borderWidth: 2,
         backgroundColor: black,
@@ -40,6 +41,6 @@ const styles = StyleSheet.create({
 SubmitBtn.propTypes = {
     text: PropTypes.string.isRequired,
     onPress: PropTypes.func.isRequired,
-    buttonStyle: PropTypes.object,
-    textStyle: PropTypes.object
+    buttonStyle: PropTypes.any,
+    textStyle: PropTypes.any
 };

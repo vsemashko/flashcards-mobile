@@ -1,12 +1,12 @@
-import {ADD_DECK, ADD_QUESTION} from '../actions';
+import {ADD_DECK, ADD_CARD} from '../actions';
 import {decks} from './decks.reducer';
 import {REMOVE_DECK} from '../actions/decks.action';
-import {REMOVE_QUESTION} from '../actions/questions.action';
+import {REMOVE_CARD} from '../actions/cards.action';
 
 describe('deck reducer', () => {
     it('ADD_DECK adds deck to decks state', () => {
         const action = {type: ADD_DECK, payload: 'React'};
-        const expected = {'React': {title: 'React', questions: []}};
+        const expected = {'React': {title: 'React', cards: []}};
         const actual = decks({}, action);
 
         expect(expected).toEqual(actual);
@@ -14,7 +14,7 @@ describe('deck reducer', () => {
 
     it('REMOVE_DECK removes deck from decks state', () => {
         const action = {type: REMOVE_DECK, payload: 'React'};
-        const initialState = {'React': {title: 'React', questions: ['1']}};
+        const initialState = {'React': {title: 'React', cards: ['1']}};
 
         const expected = {};
         const actual = decks(initialState, action);
@@ -22,22 +22,22 @@ describe('deck reducer', () => {
         expect(expected).toEqual(actual);
     });
 
-    it('ADD_QUESTION adds question to deck', () => {
-        const addedQuestion = {id: '2', question: '?', answer: '!'};
-        const action = {type: ADD_QUESTION, payload: {deck: 'React', question: addedQuestion}};
-        const initialState = {'React': {title: 'React', questions: ['1']}};
+    it('ADD_CARD adds card to deck', () => {
+        const addedCard = {id: '2', question: '?', answer: '!'};
+        const action = {type: ADD_CARD, payload: {deck: 'React', card: addedCard}};
+        const initialState = {'React': {title: 'React', cards: ['1']}};
 
-        const expected = {'React': {title: 'React', questions: ['1', '2']}};
+        const expected = {'React': {title: 'React', cards: ['1', '2']}};
         const actual = decks(initialState, action);
 
         expect(expected).toEqual(actual);
     });
 
-    it('REMOVE_QUESTION removes question from deck', () => {
-        const action = {type: REMOVE_QUESTION, payload: {deck: 'React', questionId: '1'}};
-        const initialState = {'React': {title: 'React', questions: ['1', '2']}};
+    it('REMOVE_CARD removes card from deck', () => {
+        const action = {type: REMOVE_CARD, payload: {deck: 'React', cardId: '1'}};
+        const initialState = {'React': {title: 'React', cards: ['1', '2']}};
 
-        const expected = {'React': {title: 'React', questions: ['2']}};
+        const expected = {'React': {title: 'React', cards: ['2']}};
         const actual = decks(initialState, action);
 
         expect(expected).toEqual(actual);

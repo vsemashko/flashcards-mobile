@@ -1,6 +1,6 @@
 import {applyMiddleware, combineReducers, compose, createStore} from 'redux';
 import thunk from 'redux-thunk';
-import {decks, questions} from './reducers';
+import {decks, cards} from './reducers';
 import {persistCombineReducers, persistStore, PURGE, REHYDRATE} from 'redux-persist'
 import storage from 'redux-persist/lib/storage';
 import Reactotron from 'reactotron-react-native';
@@ -14,7 +14,7 @@ const config = {
 
 let reducer = persistCombineReducers(config, {
     decks,
-    questions
+    cards
 });
 
 export const store = Reactotron.createStore(

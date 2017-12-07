@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold'
     },
-    questionsInfo: {
+    cardsInfo: {
         color: gray
     }
 });
@@ -24,7 +24,7 @@ export function DeckItem({deck, onSelect}) {
     return (
         <TouchableOpacity style={styles.container} onPress={() => onSelect()}>
             <Text style={styles.title}>{deck.title}</Text>
-            <Text style={styles.questionsInfo}>{deck.questions.length} cards</Text>
+            <Text style={styles.cardsInfo}>{deck.cards.length} cards</Text>
         </TouchableOpacity>
     );
 }
@@ -32,7 +32,7 @@ export function DeckItem({deck, onSelect}) {
 DeckItem.propTypes = {
     deck: PropTypes.shape({
         title: PropTypes.string.isRequired,
-        questions: PropTypes.arrayOf(PropTypes.string).isRequired
+        cards: PropTypes.arrayOf(PropTypes.string).isRequired
     }).isRequired,
     onSelect: PropTypes.func.isRequired
 };

@@ -1,11 +1,20 @@
 import {FontAwesome, MaterialIcons} from '@expo/vector-icons/index';
 import React from 'react';
-import {BackHandler} from 'react-native';
-import {StackNavigator, TabNavigator, NavigationActions} from 'react-navigation';
-import {black, purple, white} from '../utils/colors';
+import {StyleSheet} from 'react-native';
+import {StackNavigator, TabNavigator} from 'react-navigation';
+import {black, white} from '../utils/colors';
 import DeckListComponent from '../components/deck/DeckListComponent';
 import AddDeckComponent from '../components/deck/AddDeckComponent';
 import DeckDetailsComponent from '../components/deck/DeckDetailsComponent';
+import AddCardComponent from '../components/card/AddCardComponent';
+import QuizComponent from '../components/quiz/QuizComponent';
+
+const styles = StyleSheet.create({
+    headerStyle: {
+        height: 65,
+        backgroundColor: black
+    }
+});
 
 const Tabs = TabNavigator({
     Decks: {
@@ -28,10 +37,7 @@ const Tabs = TabNavigator({
     },
     tabBarOptions: {
         showIcon: true,
-        style: {
-            height: 65,
-            backgroundColor: black
-        }
+        style: styles.headerStyle
     }
 });
 
@@ -41,12 +47,26 @@ export const MainNavigator = StackNavigator({
     },
     DeckDetails: {
         screen: DeckDetailsComponent,
-        navigationOptions: {
+        navigationOptions: ({navigation}) => ({
+            title: `${navigation.state.params.deck}`,
             headerTintColor: white,
-            headerStyle: {
-                height: 65,
-                backgroundColor: black
-            }
+            headerStyle: styles.headerStyle
+        })
+    },
+    AddCard: {
+        screen: AddCardComponent,
+        navigationOptions: {
+            title: 'Add Card',
+            headerTintColor: white,
+            headerStyle: styles.headerStyle
+        }
+    },
+    Quiz: {
+        screen: QuizComponent,
+        navigationOptions: {
+            title: 'Quiz',
+            headerTintColor: white,
+            headerStyle: styles.headerStyle
         }
     }
 });
