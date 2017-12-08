@@ -17,7 +17,8 @@ export function SubmitBtn({text, onPress, buttonStyle = {}, textStyle = {}}) {
 
 const styles = StyleSheet.create({
     container: {
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     submitBtn: {
         width: 200,

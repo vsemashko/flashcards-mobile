@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {ScrollView, StyleSheet, TextInput} from 'react-native';
-import {addCard} from '../../actions';
+import {StyleSheet, TextInput, View} from 'react-native';
 import {SubmitBtn} from '../form-controls/SubmitBtn';
 import {white} from '../../utils/colors';
+import {addCard} from '../../actions';
 
 const styles = StyleSheet.create({
     container: {
@@ -27,44 +27,45 @@ class AddCardComponent extends React.Component {
 
     submit() {
         const {question, answer} = this.state;
-        const {addCard, deck} = this.props;
+        const {addCard, goBack, deck} = this.props;
 
         if (!question || !answer) return;
 
         addCard(deck, question, answer);
         this.setState({question: '', answer: ''});
-        this.props.navigation.navigate('DeckDetails', {deck});
+        goBack();
     }
 
     render() {
         const {question, answer} = this.state;
 
         return (
-            <ScrollView style={styles.container}>
+            <View style={styles.container}>
                 <TextInput style={styles.textInput}
-                           placeholder='Question' multiline={true} numberOfLines={3}
+                           placeholder='Question' multiline={true} numberOfLines={2}
                            value={question}
                            onChangeText={question => this.setState({question})}/>
                 <TextInput style={styles.textInput}
-                           placeholder='Answer' multiline={true} numberOfLines={8} blurOnSubmit={false}
+                           placeholder='Answer' multiline={true} numberOfLines={5} blurOnSubmit={false}
                            value={answer}
                            onChangeText={answer => this.setState({answer})}/>
                 <SubmitBtn text={'Submit'} onPress={this.submit.bind(this)}/>
-            </ScrollView>
+            </View>
         );
     }
 }
 
-function mapStateToProps({}, {navigation}) {
+function mapStateToProps(state, {navigation}) {
     const {deck} = navigation.state.params;
     return {
         deck
     };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch, {navigation}) {
     return {
-        addCard: (deck, question, answer) => dispatch(addCard(deck, question, answer))
+        addCard: (deck, question, answer) => dispatch(addCard(deck, question, answer)),
+        goBack: () => navigation.goBack()
     };
 }
 

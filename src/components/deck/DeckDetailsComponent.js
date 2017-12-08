@@ -1,8 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {black, gray, white} from '../../utils/colors';
 import {SubmitBtn} from '../form-controls/SubmitBtn';
+import {MaterialIcons} from '@expo/vector-icons/index';
 
 const styles = StyleSheet.create({
     container: {
@@ -49,7 +50,15 @@ class DeckDetailsComponent extends React.Component {
         return (
             <View style={styles.container}>
                 <View style={styles.topContainerSection}>
-                    <Text style={styles.title}>{deck.title}</Text>
+                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                        <TouchableOpacity onPress={() => {}} style={{marginRight: 10}}>
+                            <MaterialIcons name='edit' size={30} />
+                        </TouchableOpacity>
+                        <Text style={styles.title}>{deck.title}</Text>
+                        <TouchableOpacity onPress={() => {}} style={{marginLeft: 10}}>
+                            <MaterialIcons name='delete-forever' size={30} />
+                        </TouchableOpacity>
+                    </View>
                     <Text style={styles.cardssInfo}>{deck.cards.length} cards</Text>
                 </View>
                 <View style={styles.bottomContainerSection}>

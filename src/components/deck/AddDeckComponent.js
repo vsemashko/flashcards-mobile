@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet, Text, TextInput, View} from 'react-native';
+import {KeyboardAvoidingView, StyleSheet, Text, TextInput, View} from 'react-native';
 import {addDeck} from '../../actions';
 import {SubmitBtn} from '../form-controls/SubmitBtn';
 import {white} from '../../utils/colors';
@@ -46,14 +46,14 @@ class AddDeckComponent extends React.Component {
         const {addDeck} = this.props;
 
         return (
-            <View style={styles.container}>
+            <KeyboardAvoidingView behavior='position' style={styles.container}>
                 <Text style={styles.title}>What is the title of your new deck?</Text>
                 <TextInput style={styles.textInput}
                            placeholder='Deck Title' autofocus={true}
                            value={deck}
                            onChangeText={text => this.setState({deck: text})}/>
                 <SubmitBtn text={'Submit'} onPress={this.submit.bind(this)}/>
-            </View>
+            </KeyboardAvoidingView>
         );
     }
 }
