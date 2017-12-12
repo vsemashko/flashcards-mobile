@@ -36,12 +36,13 @@ const styles = StyleSheet.create({
 class DeckDetailsComponent extends React.Component {
     goToAddCard() {
         const {navigation, deck} = this.props;
-        navigation.navigate('AddCard', {deck: deck.title});
+
+        navigation.navigate('AddCard', {deckId: deck.id, deckTitle: deck.title});
     }
 
     goToQuiz() {
         const {navigation, deck} = this.props;
-        navigation.navigate('Quiz', {deck: deck.title});
+        navigation.navigate('Quiz', {deckId: deck.id, deckTitle: deck.title});
     }
 
     render() {
@@ -51,12 +52,14 @@ class DeckDetailsComponent extends React.Component {
             <View style={styles.container}>
                 <View style={styles.topContainerSection}>
                     <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                        <TouchableOpacity onPress={() => {}} style={{marginRight: 10}}>
-                            <MaterialIcons name='edit' size={30} />
+                        <TouchableOpacity onPress={() => {
+                        }} style={{marginRight: 10}}>
+                            <MaterialIcons name='edit' size={30}/>
                         </TouchableOpacity>
                         <Text style={styles.title}>{deck.title}</Text>
-                        <TouchableOpacity onPress={() => {}} style={{marginLeft: 10}}>
-                            <MaterialIcons name='delete-forever' size={30} />
+                        <TouchableOpacity onPress={() => {
+                        }} style={{marginLeft: 10}}>
+                            <MaterialIcons name='delete-forever' size={30}/>
                         </TouchableOpacity>
                     </View>
                     <Text style={styles.cardssInfo}>{deck.cards.length} cards</Text>
@@ -72,10 +75,10 @@ class DeckDetailsComponent extends React.Component {
 }
 
 function mapStateToProps({decks}, {navigation}) {
-    const {deck} = navigation.state.params;
+    const {deckId} = navigation.state.params;
 
     return {
-        deck: decks[deck]
+        deck: decks[deckId]
     };
 }
 

@@ -27,11 +27,11 @@ class AddCardComponent extends React.Component {
 
     submit() {
         const {question, answer} = this.state;
-        const {addCard, goBack, deck} = this.props;
+        const {addCard, goBack, deckId} = this.props;
 
         if (!question || !answer) return;
 
-        addCard(deck, question, answer);
+        addCard(deckId, question, answer);
         this.setState({question: '', answer: ''});
         goBack();
     }
@@ -56,15 +56,16 @@ class AddCardComponent extends React.Component {
 }
 
 function mapStateToProps(state, {navigation}) {
-    const {deck} = navigation.state.params;
+    const {deckId, deckTitle} = navigation.state.params;
     return {
-        deck
+        deckId,
+        deckTitle
     };
 }
 
 function mapDispatchToProps(dispatch, {navigation}) {
     return {
-        addCard: (deck, question, answer) => dispatch(addCard(deck, question, answer)),
+        addCard: (deckId, question, answer) => dispatch(addCard(deckId, question, answer)),
         goBack: () => navigation.goBack()
     };
 }

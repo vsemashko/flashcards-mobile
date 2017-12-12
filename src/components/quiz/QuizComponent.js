@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {addCard} from '../../actions';
 import {SubmitBtn} from '../form-controls/SubmitBtn';
 import {darkgreen, red, white} from '../../utils/colors';
 
@@ -69,17 +68,14 @@ class QuizComponent extends React.Component {
 }
 
 function mapStateToProps({decks, cards}, {navigation}) {
-    const {deck} = navigation.state.params;
+    const {deckId} = navigation.state.params;
     return {
-        deck,
-        cards: decks[deck].cards.map(card => cards[card])
+        cards: decks[deckId].cards.map(card => cards[card])
     };
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        addCard: (deck, question, answer) => dispatch(addCard(deck, question, answer))
-    };
+    return {};
 }
 
 export default connect(

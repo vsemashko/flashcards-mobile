@@ -3,10 +3,10 @@ import {guid} from '../utils/helpers';
 export const ADD_CARD = 'ADD_CARD';
 export const REMOVE_CARD = 'REMOVE_CARD';
 
-export const addCard = (deck, question, answer) => ({
+export const addCard = (deckId, question, answer) => ({
     type: ADD_CARD,
     payload: {
-        deck,
+        deckId,
         card: {
             id: guid(),
             question,
@@ -15,10 +15,10 @@ export const addCard = (deck, question, answer) => ({
     }
 });
 
-export const removeCard = (deck, cardId) => ({
+export const removeCard = (deckId, cardId) => ({
     type: REMOVE_CARD,
     payload: {
-        deck,
+        deckId,
         cardId
     }
 });

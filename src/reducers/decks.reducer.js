@@ -1,4 +1,4 @@
-import {ADD_DECK, ADD_CARD, REMOVE_DECK, REMOVE_CARD} from '../actions';
+import {ADD_CARD, ADD_DECK, REMOVE_CARD, REMOVE_DECK} from '../actions';
 
 export function decks(state = {}, action) {
     switch (action.type) {
@@ -16,24 +16,25 @@ export function decks(state = {}, action) {
 }
 
 function addDeck(state, action) {
-    const deck = action.payload;
+    const {title, id} = action.payload.deck;
     return {
         ...state,
-        [deck]: {
-            title: deck,
+        [id]: {
+            id,
+            title,
             cards: []
         }
     };
 }
 
 function addCardToDeck(state, action) {
-    const {deck, card} = action.payload;
+    const {deckId, card} = action.payload;
     return {
         ...state,
-        [deck]: {
-            ...state[deck],
+        [deckId]: {
+            ...state[deckId],
             cards: [
-                ...state[deck].cards,
+                ...state[deckId].cards,
                 card.id
             ]
         }
@@ -41,19 +42,19 @@ function addCardToDeck(state, action) {
 }
 
 function removeDeck(state, action) {
-    const deck = action.payload;
+    const deckId = action.payload;
     const newState = {...state};
-    delete newState[deck];
+    delete newState[deckId];
     return newState;
 }
 
 function removeCardFromDeck(state, action) {
-    const {deck, cardId} = action.payload;
+    const {deckId, cardId} = action.payload;
     return {
         ...state,
-        [deck]: {
-            ...state[deck],
-            cards: state[deck].cards.filter(card => card !== cardId)
+        [deckId]: {
+            ...state[deckId],
+            cards: state[deckId].cards.filter(card => card !== cardId)
         }
     }
 }

@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
 
 class DeckListComponent extends React.Component {
     goToDeckDetails(deck) {
-        this.props.navigation.navigate('DeckDetails', {deck});
+        this.props.navigation.navigate('DeckDetails', {deckTitle: deck.title, deckId: deck.id});
     }
 
     render() {
@@ -24,7 +24,7 @@ class DeckListComponent extends React.Component {
                 <FlatList data={decks}
                           keyExtractor={item => item.title}
                           renderItem={({item}) =>
-                              <DeckItem deck={item} onSelect={this.goToDeckDetails.bind(this, item.title)}/>
+                              <DeckItem deck={item} onSelect={this.goToDeckDetails.bind(this, item)}/>
                           }/>
             </View>
         );

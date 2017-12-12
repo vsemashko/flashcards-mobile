@@ -16,7 +16,7 @@ describe('cards reducer', () => {
         const expected = {'1': {id: '1', question: '?', answer: '!'}};
         const actual = cards({}, action);
 
-        expect(expected).toEqual(actual);
+        expect(actual).toEqual(expected);
     });
 
     it('REMOVE_CARD removes card from cards state', () => {
@@ -26,6 +26,6 @@ describe('cards reducer', () => {
         const expected = {};
         const actual = cards(initialState, action);
 
-        expect(expected).toEqual(actual);
+        expect(actual).toEqual(expected);
     });
 });

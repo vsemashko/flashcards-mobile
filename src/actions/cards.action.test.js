@@ -6,7 +6,7 @@ describe('cards actions', () => {
         const expected = {
             type: ADD_CARD,
             payload: {
-                deck: 'React',
+                deckId: '42',
                 card: {
                     id: '1',
                     question: '?',
@@ -14,21 +14,21 @@ describe('cards actions', () => {
                 }
             }
         };
-        const actual = addCard('React', '?', '!');
+        const actual = addCard('42', '?', '!');
         expect(actual.payload.card).toHaveProperty('id');
         actual.payload.card.id = '1';
-        expect(expected).toEqual(actual);
+        expect(actual).toEqual(expected);
     });
 
     it('removeCard creates action for removing card', () => {
         const expected = {
             type: REMOVE_CARD, payload: {
-                deck: 'React',
+                deckId: 'React',
                 cardId: '1'
             }
         };
         const actual = removeCard('React', '1');
 
-        expect(expected).toEqual(actual);
+        expect(actual).toEqual(expected);
     });
 });
