@@ -4,6 +4,7 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {black, gray, white} from '../../utils/colors';
 import {SubmitBtn} from '../form-controls/SubmitBtn';
 import {MaterialIcons} from '@expo/vector-icons/index';
+import {removeDeck} from '../../actions';
 
 const styles = StyleSheet.create({
     container: {
@@ -45,20 +46,32 @@ class DeckDetailsComponent extends React.Component {
         navigation.navigate('Quiz', {deckId: deck.id, deckTitle: deck.title});
     }
 
+    editDeck() {
+        const {deck, navigation} = this.props;
+        navigation.navigate('EditDeck', {deckId: deck.id, deckTitle: deck.title});
+    }
+
+    removeDeck() {
+        const {deck, removeDeck, goBack} = this.props;
+
+        goBack();
+        removeDeck(deck.id);
+    }
+
     render() {
         const {deck} = this.props;
+
+        if (!deck) return null;
 
         return (
             <View style={styles.container}>
                 <View style={styles.topContainerSection}>
                     <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                        <TouchableOpacity onPress={() => {
-                        }} style={{marginRight: 10}}>
+                        <TouchableOpacity onPress={this.editDeck.bind(this)} style={{marginRight: 10}}>
                             <MaterialIcons name='edit' size={30}/>
                         </TouchableOpacity>
                         <Text style={styles.title}>{deck.title}</Text>
-                        <TouchableOpacity onPress={() => {
-                        }} style={{marginLeft: 10}}>
+                        <TouchableOpacity onPress={this.removeDeck.bind(this)} style={{marginLeft: 10}}>
                             <MaterialIcons name='delete-forever' size={30}/>
                         </TouchableOpacity>
                     </View>
@@ -82,6 +95,14 @@ function mapStateToProps({decks}, {navigation}) {
     };
 }
 
+function mapDispatchToProps(dispatch, {navigation}) {
+    return {
+        removeDeck: (deckId) => dispatch(removeDeck(deckId)),
+        goBack: () => navigation.goBack()
+    };
+}
+
 export default connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(DeckDetailsComponent);

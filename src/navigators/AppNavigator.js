@@ -8,6 +8,7 @@ import AddDeckComponent from '../components/deck/AddDeckComponent';
 import DeckDetailsComponent from '../components/deck/DeckDetailsComponent';
 import AddCardComponent from '../components/card/AddCardComponent';
 import QuizComponent from '../components/quiz/QuizComponent';
+import EditDeckComponent from '../components/deck/EditDeckComponent';
 
 const styles = StyleSheet.create({
     headerStyle: {
@@ -52,6 +53,14 @@ export const MainNavigator = StackNavigator({
             headerTintColor: white,
             headerStyle: styles.headerStyle
         })
+    },
+    EditDeck: {
+        screen: EditDeckComponent,
+        navigationOptions: {
+            title: 'Edit Deck',
+            headerTintColor: white,
+            headerStyle: styles.headerStyle
+        }
     },
     AddCard: {
         screen: AddCardComponent,

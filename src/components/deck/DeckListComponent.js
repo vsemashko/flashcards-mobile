@@ -22,7 +22,7 @@ class DeckListComponent extends React.Component {
         return (
             <View style={styles.container}>
                 <FlatList data={decks}
-                          keyExtractor={item => item.title}
+                          keyExtractor={item => item.id}
                           renderItem={({item}) =>
                               <DeckItem deck={item} onSelect={this.goToDeckDetails.bind(this, item)}/>
                           }/>

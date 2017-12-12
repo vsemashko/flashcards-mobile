@@ -1,4 +1,5 @@
 import {ADD_CARD, ADD_DECK, REMOVE_CARD, REMOVE_DECK} from '../actions';
+import {RENAME_DECK} from '../actions/decks.action';
 
 export function decks(state = {}, action) {
     switch (action.type) {
@@ -8,6 +9,8 @@ export function decks(state = {}, action) {
             return removeDeck(state, action);
         case ADD_CARD:
             return addCardToDeck(state, action);
+        case RENAME_DECK:
+            return renameDeck(state, action);
         case REMOVE_CARD:
             return removeCardFromDeck(state, action);
         default:
@@ -37,6 +40,17 @@ function addCardToDeck(state, action) {
                 ...state[deckId].cards,
                 card.id
             ]
+        }
+    };
+}
+
+function renameDeck(state, action) {
+    const {deckId, deckTitle} = action.payload;
+    return {
+        ...state,
+        [deckId]: {
+            ...state[deckId],
+            title: deckTitle
         }
     };
 }

@@ -1,6 +1,7 @@
 import {guid} from '../utils/helpers';
 
 export const ADD_DECK = 'ADD_DECK';
+export const RENAME_DECK = 'RENAME_DECK';
 export const REMOVE_DECK = 'REMOVE_DECK';
 
 export const addDeck = (deck) => ({
@@ -10,6 +11,14 @@ export const addDeck = (deck) => ({
             id: guid(),
             title: deck
         }
+    }
+});
+
+export const renameDeck = (deckId, deckTitle) => ({
+    type: RENAME_DECK,
+    payload: {
+        deckId,
+        deckTitle
     }
 });
 
