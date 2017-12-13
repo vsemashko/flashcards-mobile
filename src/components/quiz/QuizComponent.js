@@ -61,6 +61,7 @@ class QuizComponent extends React.Component {
             })
         } else {
             this.setState({
+                isQuestion: true,
                 currentCardIndex: currentCardIndex + 1,
                 correctAnswersCount: newCorrectAnswersCount
             })
