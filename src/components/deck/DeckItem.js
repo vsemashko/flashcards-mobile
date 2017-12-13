@@ -31,6 +31,7 @@ export function DeckItem({deck, onSelect}) {
 
 DeckItem.propTypes = {
     deck: PropTypes.shape({
+        id: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         cards: PropTypes.arrayOf(PropTypes.string).isRequired
     }).isRequired,

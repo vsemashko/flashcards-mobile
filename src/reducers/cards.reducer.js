@@ -1,9 +1,12 @@
 import {ADD_CARD, REMOVE_CARD} from '../actions';
+import {EDIT_CARD} from '../actions/cards.action';
 
 
 export function cards(state = {}, action) {
     switch (action.type) {
         case ADD_CARD:
+            return addCard(state, action);
+        case EDIT_CARD:
             return addCard(state, action);
         case REMOVE_CARD:
             return removeCard(state, action);

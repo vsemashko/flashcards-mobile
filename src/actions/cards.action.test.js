@@ -1,4 +1,5 @@
 import {ADD_CARD, addCard, REMOVE_CARD, removeCard} from '../actions';
+import {EDIT_CARD, editCard} from './cards.action';
 
 
 describe('cards actions', () => {
@@ -28,6 +29,21 @@ describe('cards actions', () => {
             }
         };
         const actual = removeCard('React', '1');
+
+        expect(actual).toEqual(expected);
+    });
+
+    it('editCard creates action for editing card', () => {
+        const expected = {
+            type: EDIT_CARD, payload: {
+                card: {
+                    id: '1',
+                    question: '?',
+                    answer: '!'
+                }
+            }
+        };
+        const actual = editCard({id: '1', question: '?', answer: '!'});
 
         expect(actual).toEqual(expected);
     });

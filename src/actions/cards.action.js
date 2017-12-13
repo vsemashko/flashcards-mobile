@@ -1,6 +1,7 @@
 import {guid} from '../utils/helpers';
 
 export const ADD_CARD = 'ADD_CARD';
+export const EDIT_CARD = 'EDIT_CARD';
 export const REMOVE_CARD = 'REMOVE_CARD';
 
 export const addCard = (deckId, question, answer) => ({
@@ -12,6 +13,13 @@ export const addCard = (deckId, question, answer) => ({
             question,
             answer
         }
+    }
+});
+
+export const editCard = (card) => ({
+    type: EDIT_CARD,
+    payload: {
+        card
     }
 });
 

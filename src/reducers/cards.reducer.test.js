@@ -1,5 +1,6 @@
 import {ADD_CARD, REMOVE_CARD} from '../actions';
 import {cards} from './cards.reducer';
+import {EDIT_CARD} from '../actions/cards.action';
 
 describe('cards reducer', () => {
     it('ADD_CARD adds card to cards state', () => {
@@ -24,6 +25,16 @@ describe('cards reducer', () => {
         const initialState = {'1': {id: '1', question: '?', answer: '!'}};
 
         const expected = {};
+        const actual = cards(initialState, action);
+
+        expect(actual).toEqual(expected);
+    });
+
+    it('EDIT_CARD updates card', () => {
+        const action = {type: EDIT_CARD, payload: {card: {id: '1', question: '??', answer: '!!'}}};
+        const initialState = {'1': {id: '1', question: '?', answer: '!'}};
+
+        const expected = {'1': {id: '1', question: '??', answer: '!!'}};
         const actual = cards(initialState, action);
 
         expect(actual).toEqual(expected);
