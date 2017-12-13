@@ -1,6 +1,6 @@
-import {applyMiddleware, combineReducers, compose, createStore} from 'redux';
+import {applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
-import {decks, cards} from './reducers';
+import {cards, decks} from './reducers';
 import {persistCombineReducers, persistStore, PURGE, REHYDRATE} from 'redux-persist'
 import storage from 'redux-persist/lib/storage';
 import Reactotron from 'reactotron-react-native';

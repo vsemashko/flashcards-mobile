@@ -5,6 +5,7 @@ import {black, gray, white} from '../../utils/colors';
 import {SubmitBtn} from '../form-controls/SubmitBtn';
 import {MaterialIcons} from '@expo/vector-icons/index';
 import {removeDeck} from '../../actions';
+import {clearLocalNotification, setLocalNotification} from '../../utils/helpers';
 
 const styles = StyleSheet.create({
     container: {
@@ -44,6 +45,9 @@ class DeckDetailsComponent extends React.Component {
     goToQuiz() {
         const {navigation, deck} = this.props;
         navigation.navigate('Quiz', {deckId: deck.id, deckTitle: deck.title});
+
+        clearLocalNotification()
+            .then(setLocalNotification);
     }
 
     editDeck() {

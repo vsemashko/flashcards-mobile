@@ -7,8 +7,13 @@ import './ReactotronConfig';
 import {persistor, store} from './src/store';
 import FlashcardsStatusBar from './src/components/common/FlashcardsStatusBar';
 import {MainNavigator} from './src/navigators/AppNavigator';
+import {setLocalNotification} from './src/utils/helpers';
 
 export default class App extends React.Component {
+    componentDidMount() {
+        setLocalNotification();
+    }
+
     render() {
         return (
             <Provider store={store}>
