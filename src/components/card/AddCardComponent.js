@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet, TextInput, View} from 'react-native';
+import {StyleSheet, TextInput, View, ScrollView, KeyboardAvoidingView} from 'react-native';
 import {SubmitBtn} from '../form-controls/SubmitBtn';
 import {white} from '../../utils/colors';
 import {addCard} from '../../actions';
@@ -11,11 +11,18 @@ const styles = StyleSheet.create({
         backgroundColor: white
     },
     textInput: {
+        margin: 10,
         alignSelf: 'stretch',
-        margin: 20,
         padding: 10,
         borderWidth: 2,
         borderRadius: 5
+    },
+    questionInput: {
+        marginBottom: 0,
+        maxHeight: 70
+    },
+    answerInput: {
+        maxHeight: 150
     }
 });
 
@@ -41,11 +48,11 @@ class AddCardComponent extends React.Component {
 
         return (
             <View style={styles.container}>
-                <TextInput style={styles.textInput}
+                <TextInput style={[styles.textInput, styles.questionInput]}
                            placeholder='Question' multiline={true} numberOfLines={2}
                            value={question}
                            onChangeText={question => this.setState({question})}/>
-                <TextInput style={styles.textInput}
+                <TextInput style={[styles.textInput, styles.answerInput]}
                            placeholder='Answer' multiline={true} numberOfLines={5} blurOnSubmit={false}
                            value={answer}
                            onChangeText={answer => this.setState({answer})}/>

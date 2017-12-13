@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
 export function DeckItem({deck, onSelect}) {
     return (
         <TouchableOpacity style={styles.container} onPress={() => onSelect()}>
-            <Text style={styles.title}>{deck.title}</Text>
+            <Text numberOfLines={2} ellipsizeMode='tail' style={styles.title}>{deck.title}</Text>
             <Text style={styles.cardsInfo}>{deck.cards.length} cards</Text>
         </TouchableOpacity>
     );

@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
 export function CardItem({card, onSelect, onRemove}) {
     return (
         <TouchableOpacity style={styles.container} onPress={() => onSelect()}>
-            <Text style={styles.title}>{card.question}</Text>
+            <Text numberOfLines={3} ellipsizeMode='tail' style={styles.title}>{card.question}</Text>
             <TouchableOpacity onPress={() => onRemove()} style={styles.deleteBtn}>
                 <Entypo name='cross' size={30}/>
             </TouchableOpacity>

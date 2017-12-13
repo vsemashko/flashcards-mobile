@@ -8,16 +8,21 @@ import {editCard} from '../../actions/cards.action';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: white,
-        alignItems: 'center'
+        backgroundColor: white
     },
     textInput: {
-        height: 50,
+        margin: 10,
         alignSelf: 'stretch',
-        margin: 20,
         padding: 10,
         borderWidth: 2,
         borderRadius: 5
+    },
+    questionInput: {
+        marginBottom: 0,
+        maxHeight: 70
+    },
+    answerInput: {
+        maxHeight: 150
     }
 });
 
@@ -51,15 +56,14 @@ class EditCardComponent extends React.Component {
 
         return (
             <View behavior='position' style={styles.container}>
-                <TextInput style={styles.textInput}
+                <TextInput style={[styles.textInput, styles.questionInput]}
                            placeholder='Question' multiline={true} numberOfLines={2}
                            value={question}
                            onChangeText={question => this.setState({question})}/>
-                <TextInput style={styles.textInput}
+                <TextInput style={[styles.textInput, styles.answerInput]}
                            placeholder='Answer' multiline={true} numberOfLines={5} blurOnSubmit={false}
                            value={answer}
                            onChangeText={answer => this.setState({answer})}/>
-
                 <SubmitBtn text={'Submit'} onPress={this.submit.bind(this)}/>
             </View>
         );

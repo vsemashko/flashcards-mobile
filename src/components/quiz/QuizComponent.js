@@ -1,9 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {SubmitBtn} from '../form-controls/SubmitBtn';
 import {darkgreen, red, white} from '../../utils/colors';
 import {QuizScore} from './QuizScore';
+import {FlipCardComponent} from './FlipCardComponent';
 
 const styles = StyleSheet.create({
     container: {
@@ -11,10 +12,10 @@ const styles = StyleSheet.create({
         backgroundColor: white,
         justifyContent: 'center'
     },
-    topContainerSection: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
+    cardContainer: {
+        flex: 2,
+        marginTop: 40,
+        margin: 10
     },
     bottomContainerSection: {
         flex: 1,
@@ -80,10 +81,7 @@ class QuizComponent extends React.Component {
         return (
             <View style={styles.container}>
                 <Text style={styles.questionsCounter}>{currentCardIndex + 1}/{cards.length}</Text>
-                <TouchableOpacity style={styles.topContainerSection} onPress={() => this.setState({isQuestion: !isQuestion})}>
-                    <Text style={styles.title}>{isQuestion ? currentCard.question : currentCard.answer}</Text>
-                    <Text>{isQuestion ? 'Question' : 'Answer'}</Text>
-                </TouchableOpacity>
+                <FlipCardComponent style={styles.cardContainer} card={currentCard}/>
                 <View style={styles.bottomContainerSection}>
                     <SubmitBtn text={'Correct'} onPress={() => this.submitQuestion(true)} buttonStyle={styles.correctBtn}/>
                     <SubmitBtn text={'Incorrect'} onPress={() => this.submitQuestion(false)} buttonStyle={styles.incorrectBtn}/>
