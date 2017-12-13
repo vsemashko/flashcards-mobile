@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {StyleSheet, Text, View} from 'react-native';
 import {SubmitBtn} from '../form-controls/SubmitBtn';
 import {darkgreen, red, white} from '../../utils/colors';
-import {QuizScore} from './QuizScore';
+import {QuizScore, QuizScoreComponent} from './QuizScoreComponent';
 import {FlipCardComponent} from './FlipCardComponent';
 
 const styles = StyleSheet.create({
@@ -74,7 +74,9 @@ class QuizComponent extends React.Component {
         const {currentCardIndex, isQuestion, isScoreScreen, correctAnswersCount} = this.state;
 
         if (cards.length === 0) return <Text>NONE</Text>;
-        if (isScoreScreen) return <QuizScore correctAnswersCount={correctAnswersCount} totalQuestionsCount={cards.length} onClose={goBack}/>;
+        if (isScoreScreen) return <QuizScoreComponent correctAnswersCount={correctAnswersCount}
+                                                      totalQuestionsCount={cards.length}
+                                                      onClose={goBack}/>;
 
         const currentCard = cards[currentCardIndex];
 
