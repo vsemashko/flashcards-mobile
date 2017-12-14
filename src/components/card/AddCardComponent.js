@@ -1,30 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet, TextInput, View, ScrollView, KeyboardAvoidingView} from 'react-native';
+import {TextInput, View} from 'react-native';
 import {SubmitBtn} from '../form-controls/SubmitBtn';
-import {white} from '../../utils/colors';
 import {addCard} from '../../actions';
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: white
-    },
-    textInput: {
-        margin: 10,
-        alignSelf: 'stretch',
-        padding: 10,
-        borderWidth: 2,
-        borderRadius: 5
-    },
-    questionInput: {
-        marginBottom: 0,
-        maxHeight: 70
-    },
-    answerInput: {
-        maxHeight: 150
-    }
-});
+import {editCardStyles as styles} from './CardStyles';
 
 class AddCardComponent extends React.Component {
     state = {

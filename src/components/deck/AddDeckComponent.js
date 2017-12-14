@@ -1,32 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {KeyboardAvoidingView, StyleSheet, Text, TextInput} from 'react-native';
+import {KeyboardAvoidingView, Text, TextInput} from 'react-native';
 import {addDeck} from '../../actions';
 import {SubmitBtn} from '../form-controls/SubmitBtn';
-import {white} from '../../utils/colors';
+import {editDeckStyles as styles} from './EditDeckStyles';
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: white,
-        alignItems: 'center'
-    },
-    title: {
-        margin: 20,
-        marginTop: 40,
-        fontSize: 40,
-        textAlign: 'center',
-        fontWeight: 'bold'
-    },
-    textInput: {
-        height: 50,
-        alignSelf: 'stretch',
-        margin: 20,
-        padding: 10,
-        borderWidth: 2,
-        borderRadius: 5
-    }
-});
 
 class AddDeckComponent extends React.Component {
     state = {
