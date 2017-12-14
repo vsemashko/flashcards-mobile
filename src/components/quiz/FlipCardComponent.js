@@ -22,6 +22,10 @@ export class FlipCardComponent extends React.Component {
         });
     }
 
+    componentWillUnmount() {
+        this.state.animatedValue.removeAllListeners();
+    }
+
     componentWillReceiveProps() {
         this.state.animatedValue.setValue(0);
     }
