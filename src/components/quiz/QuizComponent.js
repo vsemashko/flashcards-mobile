@@ -42,13 +42,17 @@ const styles = StyleSheet.create({
     }
 });
 
-class QuizComponent extends React.Component {
-    state = {
+function getInitialState() {
+    return {
         currentCardIndex: 0,
         correctAnswersCount: 0,
         isQuestion: true,
         isScoreScreen: false
     };
+}
+
+class QuizComponent extends React.Component {
+    state = getInitialState();
 
     submitQuestion(isCorrect) {
         const {cards} = this.props;
@@ -69,6 +73,10 @@ class QuizComponent extends React.Component {
         }
     }
 
+    restartQuiz() {
+        this.setState(getInitialState());
+    }
+
     render() {
         const {cards, goBack} = this.props;
         const {currentCardIndex, isQuestion, isScoreScreen, correctAnswersCount} = this.state;
@@ -76,6 +84,7 @@ class QuizComponent extends React.Component {
         if (cards.length === 0) return <Text>NONE</Text>;
         if (isScoreScreen) return <QuizScoreComponent correctAnswersCount={correctAnswersCount}
                                                       totalQuestionsCount={cards.length}
+                                                      onRestart={() => this.restartQuiz()}
                                                       onClose={goBack}/>;
 
         const currentCard = cards[currentCardIndex];

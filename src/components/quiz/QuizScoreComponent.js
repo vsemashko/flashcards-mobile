@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Animated, StyleSheet, Text, View} from 'react-native';
 import {SubmitBtn} from '../form-controls/SubmitBtn';
-import {green, white} from '../../utils/colors';
+import {black, green, white} from '../../utils/colors';
 import Pie from 'react-native-pie'
 
 
@@ -54,7 +54,7 @@ export class QuizScoreComponent extends React.Component {
     }
 
     render() {
-        const {correctAnswersCount, totalQuestionsCount, onClose} = this.props;
+        const {correctAnswersCount, totalQuestionsCount, onRestart, onClose} = this.props;
         const {currentScoreValue} = this.state;
 
         const score = this.round(currentScoreValue);
@@ -72,7 +72,8 @@ export class QuizScoreComponent extends React.Component {
                     </View>
                 </View>
                 <Text style={styles.result}>You've answered {correctAnswersCount} of {totalQuestionsCount} questions correctly</Text>
-                <SubmitBtn text={'Close'} onPress={onClose}/>
+                <SubmitBtn text={'Restart Quiz'} onPress={onRestart} buttonStyle={{backgroundColor: white}} textStyle={{color: black}}/>
+                <SubmitBtn text={'Back to Deck'} onPress={onClose}/>
             </View>
         );
     }
@@ -90,5 +91,6 @@ export class QuizScoreComponent extends React.Component {
 QuizScoreComponent.propTypes = {
     correctAnswersCount: PropTypes.number.isRequired,
     totalQuestionsCount: PropTypes.number.isRequired,
+    onRestart: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired
 };
