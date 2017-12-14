@@ -3,12 +3,12 @@ import {AsyncStorage} from 'react-native';
 
 export const NOTIFICATION_KEY = 'Flashcards:notifications';
 
-export const clearLocalNotification = () => {
+export const clearQuizReminderLocalNotification = () => {
     return AsyncStorage.removeItem(NOTIFICATION_KEY)
         .then(Notifications.cancelAllScheduledNotificationsAsync);
 };
 
-const createNotification = () => {
+const createQuizReminderNotification = () => {
     return {
         title: 'Flashcards reminder',
         body: "Don't forget about quiz today!",
@@ -21,7 +21,7 @@ const createNotification = () => {
 };
 
 
-export const setLocalNotification = () => {
+export const setQuizReminderLocalNotification = () => {
     AsyncStorage.getItem(NOTIFICATION_KEY)
         .then(JSON.parse)
         .then((data) => {
@@ -37,7 +37,7 @@ export const setLocalNotification = () => {
                             tomorrow.setMinutes(0);
 
                             Notifications.scheduleLocalNotificationAsync(
-                                createNotification(),
+                                createQuizReminderNotification(),
                                 {
                                     time: tomorrow,
                                     repeat: 'day',

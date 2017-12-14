@@ -2,9 +2,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Text, View} from 'react-native';
 import {SubmitBtn} from '../form-controls/SubmitBtn';
-import {QuizScore, QuizScoreComponent} from './QuizScoreComponent';
+import {QuizScoreComponent} from './QuizScoreComponent';
 import {FlipCardComponent} from './FlipCardComponent';
 import {quizStyles as styles} from './QuizStyles';
+import {clearQuizReminderLocalNotification, setQuizReminderLocalNotification} from '../../utils/helpers';
 
 
 function getInitialState() {
@@ -18,6 +19,11 @@ function getInitialState() {
 
 class QuizComponent extends React.Component {
     state = getInitialState();
+
+    componentDidMount() {
+        clearQuizReminderLocalNotification()
+            .then(setQuizReminderLocalNotification);
+    }
 
     submitQuestion(isCorrect) {
         const {cards} = this.props;
