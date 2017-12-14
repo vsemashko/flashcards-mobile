@@ -57,17 +57,4 @@ class AddDeckComponent extends React.Component {
     }
 }
 
-function mapStateToProps() {
-    return {};
-}
-
-function mapDispatchToProps(dispatch) {
-    return {
-        addDeck: deck => dispatch(addDeck(deck))
-    };
-}
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(AddDeckComponent);
+export default connect(null, {addDeck})(AddDeckComponent);

@@ -1,9 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {FlatList, StyleSheet, View, Alert} from 'react-native';
+import {Alert, FlatList, StyleSheet, View} from 'react-native';
 import {white} from '../../utils/colors';
 import {CardItem} from './CardItem';
-import {removeCard, removeDeck} from '../../actions';
+import {removeCard} from '../../actions';
 
 const styles = StyleSheet.create({
     container: {
@@ -25,7 +25,7 @@ class CardListComponent extends React.Component {
                 {text: 'Delete', onPress: () => this.removeCard(card)},
                 {text: 'Cancel', onPress: () => {}, style: 'cancel'},
             ],
-            { cancelable: true }
+            {cancelable: true}
         )
     }
 
@@ -61,13 +61,4 @@ function mapStateToProps({decks, cards}, {navigation}) {
     };
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        removeCard: (deckId, cardId) => dispatch(removeCard(deckId, cardId))
-    };
-}
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(CardListComponent);
+export default connect(mapStateToProps, {removeCard})(CardListComponent);

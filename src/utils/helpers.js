@@ -3,12 +3,12 @@ import {AsyncStorage} from 'react-native';
 
 export const NOTIFICATION_KEY = 'Flashcards:notifications';
 
-export function clearLocalNotification() {
+export const clearLocalNotification = () => {
     return AsyncStorage.removeItem(NOTIFICATION_KEY)
         .then(Notifications.cancelAllScheduledNotificationsAsync);
-}
+};
 
-function createNotification() {
+const createNotification = () => {
     return {
         title: 'Flashcards reminder',
         body: "Don't forget about quiz today!",
@@ -18,10 +18,10 @@ function createNotification() {
             vibrate: true
         }
     };
-}
+};
 
 
-export function setLocalNotification() {
+export const setLocalNotification = () => {
     AsyncStorage.getItem(NOTIFICATION_KEY)
         .then(JSON.parse)
         .then((data) => {
@@ -49,15 +49,15 @@ export function setLocalNotification() {
                     });
             }
         });
-}
+};
 
-export function guid() {
+export const guid = () => {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
         s4() + '-' + s4() + s4() + s4();
-}
+};
 
-function s4() {
+const s4 = () => {
     return Math.floor((1 + Math.random()) * 0x10000)
         .toString(16)
         .substring(1);
-}
+};

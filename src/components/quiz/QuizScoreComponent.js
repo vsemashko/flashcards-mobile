@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
 });
 
 export class QuizScoreComponent extends React.Component {
+
     state = {
         animatedScore: new Animated.Value(0),
         currentScoreValue: 0
@@ -40,6 +41,10 @@ export class QuizScoreComponent extends React.Component {
         this.state.animatedScore.addListener(({value}) => {
             this.setState({currentScoreValue: value});
         });
+    }
+
+    componentWillUnmount() {
+        this.state.animatedScore.removeAllListeners();
     }
 
     componentDidMount() {
