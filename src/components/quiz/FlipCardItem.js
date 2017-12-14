@@ -1,25 +1,7 @@
-import {StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
+import {Text, TouchableWithoutFeedback, View} from 'react-native';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {black, red} from '../../utils/colors';
-
-const styles = StyleSheet.create({
-    flipCardContainer: {
-        flex: 1,
-        padding: 20,
-        borderWidth: 2,
-        borderColor: black,
-        borderRadius: 15
-    },
-    title: {
-        textAlign: 'center',
-        fontWeight: 'bold',
-        color: red
-    },
-    content: {
-        textAlign: 'center'
-    }
-});
+import {flipCardItemStyles as styles} from './QuizStyles';
 
 export const FlipCardItem = ({title, content, onPress}) => (
     <TouchableWithoutFeedback onPress={onPress}>

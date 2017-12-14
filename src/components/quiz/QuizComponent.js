@@ -1,46 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import {SubmitBtn} from '../form-controls/SubmitBtn';
-import {darkgreen, red, white} from '../../utils/colors';
 import {QuizScore, QuizScoreComponent} from './QuizScoreComponent';
 import {FlipCardComponent} from './FlipCardComponent';
+import {quizStyles as styles} from './QuizStyles';
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: white,
-        justifyContent: 'center'
-    },
-    cardContainer: {
-        flex: 2,
-        marginTop: 40,
-        margin: 10
-    },
-    bottomContainerSection: {
-        flex: 1,
-        justifyContent: 'flex-start',
-        alignItems: 'center'
-    },
-    title: {
-        fontSize: 40,
-        textAlign: 'center',
-        fontWeight: 'bold'
-    },
-    correctBtn: {
-        backgroundColor: darkgreen,
-        borderColor: darkgreen,
-    },
-    incorrectBtn: {
-        backgroundColor: red,
-        borderColor: red,
-    },
-    questionsCounter: {
-        position: 'absolute',
-        top: 10,
-        left: 10
-    }
-});
 
 function getInitialState() {
     return {

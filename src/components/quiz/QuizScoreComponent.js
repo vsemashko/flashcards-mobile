@@ -4,31 +4,7 @@ import {Animated, StyleSheet, Text, View} from 'react-native';
 import {SubmitBtn} from '../form-controls/SubmitBtn';
 import {black, green, white} from '../../utils/colors';
 import Pie from 'react-native-pie'
-
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: white,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    score: {
-        position: 'absolute',
-        width: 100,
-        height: 100,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    scoreText: {
-        fontSize: 24,
-    },
-    result: {
-        margin: 10,
-        fontSize: 20,
-        textAlign: 'center'
-    }
-});
+import {quizScoreStyles as styles} from './QuizStyles';
 
 export class QuizScoreComponent extends React.Component {
 
