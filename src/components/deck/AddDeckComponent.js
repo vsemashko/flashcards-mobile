@@ -16,7 +16,6 @@ class AddDeckComponent extends React.Component {
 
         this.props.addDeck(this.state.deck);
         this.setState({deck: ''});
-        this.props.navigation.navigate('Decks');
     }
 
     render() {
@@ -35,4 +34,17 @@ class AddDeckComponent extends React.Component {
     }
 }
 
-export default connect(null, {addDeck})(AddDeckComponent);
+function mapDispatchToProps(dispatch, {navigation}) {
+    return {
+        addDeck: deck => {
+            const action = addDeck(deck);
+            dispatch(action);
+            const newDeck = action.payload.deck;
+            navigation.navigate('Decks');
+            navigation.navigate('DeckDetails', {deckTitle: newDeck.title, deckId: newDeck.id});
+        }
+    };
+}
+
+
+export default connect(null, mapDispatchToProps)(AddDeckComponent);
