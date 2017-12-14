@@ -5,7 +5,7 @@ export const editDeckStyles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: white,
-        alignItems: 'center'
+        alignItems: 'stretch'
     },
     title: {
         margin: 20,

@@ -1,39 +1,49 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {TextInput, View} from 'react-native';
+import {KeyboardAvoidingView, TextInput, View} from 'react-native';
 import {SubmitBtn} from '../form-controls/SubmitBtn';
 import {renameDeck} from '../../actions/decks.action';
 import {editDeckStyles as styles} from './EditDeckStyles';
+import {errorStyles, ValidationErrors} from '../form-controls/ValidationErrors';
+
+const getInitialState = function () {
+    return {
+        deck: '',
+        validationErrors: {}
+    };
+};
 
 class EditDeckComponent extends React.Component {
-    state = {
-        deck: ''
-    };
+    state = getInitialState();
 
     componentDidMount() {
         this.setState({deck: this.props.deckTitle})
     }
 
     submit() {
-        if (!this.state.deck) return;
+        if (!this.state.deck) {
+            this.setState({validationErrors: {deck: 'Deck name couldn\'t be empty'}});
+            return;
+        }
 
         const {deckId, renameDeck, goBack} = this.props;
 
         renameDeck(deckId, this.state.deck);
-        this.setState({deck: ''});
+        this.setState(getInitialState());
         goBack();
     }
 
     render() {
-        const {deck} = this.state;
+        const {deck, validationErrors} = this.state;
 
         return (
             <View behavior='position' style={styles.container}>
-                <TextInput style={styles.textInput}
+                <TextInput style={[styles.textInput, validationErrors.deck && errorStyles.invalidInput]}
                            placeholder='Deck Title' autofocus={true}
                            value={deck}
-                           onChangeText={deck => this.setState({deck})}/>
+                           onChangeText={deck => this.setState({deck, validationErrors: {}})}/>
                 <SubmitBtn text={'Submit'} onPress={this.submit.bind(this)}/>
+                <ValidationErrors errors={Object.values(validationErrors)}/>
             </View>
         );
     }
